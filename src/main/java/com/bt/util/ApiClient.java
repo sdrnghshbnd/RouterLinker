@@ -9,18 +9,45 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+/**
+ * A client for making HTTP requests to fetch data from an API.
+ * This class handles HTTP communication with a given API URL and retrieves data
+ * in the form of a JSON string. It uses {@link HttpClient} for sending requests
+ * and handles possible errors during the request process.
+ */
 public class ApiClient {
     private static final Logger logger = LoggerFactory.getLogger(ApiClient.class);
     private final HttpClient httpClient;
 
-    public ApiClient(HttpClient httpClient) {
+    /**
+     * Creates an instance of {@code ApiClient} with a custom {@link HttpClient}.
+     *
+     * @param httpClient the {@code HttpClient} to use for making requests.
+     */
+    ApiClient(HttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
+    /**
+     * Creates an instance of {@code ApiClient} with a default {@link HttpClient}.
+     */
     public ApiClient() {
         this(HttpClient.newHttpClient());
     }
 
+    /**
+     * Fetches JSON data from the specified API URL.
+     * <p>
+     * Makes an HTTP GET request to the provided URL and returns the response body
+     * as a string. Throws an exception if the request fails or if the status code
+     * is not 200 OK.
+     * </p>
+     *
+     * @param apiUrl the URL of the API endpoint to fetch data from.
+     * @return the response body as a string.
+     * @throws Exception if an error occurs during the request or if the status code
+     *         is not 200.
+     */
     public String fetchJsonFromApi(String apiUrl) throws Exception {
         logger.debug("Fetching data from API: {}", apiUrl);
         try {

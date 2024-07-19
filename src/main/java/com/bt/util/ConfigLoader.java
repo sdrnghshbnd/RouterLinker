@@ -7,6 +7,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * A utility class for loading configuration properties from a file.
+ * <p>
+ * This class is responsible for loading properties from a configuration file
+ * named {@code config.properties} located in the classpath. It provides a
+ * method to retrieve property values by their keys.
+ * </p>
+ */
 public class ConfigLoader {
     private static final Logger logger = LoggerFactory.getLogger(ConfigLoader.class);
     private static final Properties properties = new Properties();
@@ -25,6 +33,13 @@ public class ConfigLoader {
         }
     }
 
+    /**
+     * Retrieves the value of a property by its key.
+     * If the key is not found in the properties file, a warning is logged.
+     *
+     * @param key the key of the property to retrieve.
+     * @return the value of the property, or {@code null} if the property is not found.
+     */
     public static String getProperty(String key) {
         String value = properties.getProperty(key);
         if (value == null) {

@@ -10,15 +10,28 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
+/**
+ * It parses the JSON, maps locations, and finds connections between routers.
+ */
 public class DataProcessor {
     private static final Logger logger = LoggerFactory.getLogger(DataProcessor.class);
 
+    /**
+     * Processes the provided JSON response to find connections between routers.
+     *
+     * @param jsonResponse the JSON response containing routers and locations data.
+     * @return a set of formatted strings representing connections between different locations.
+     * @throws Exception if an error occurs during parsing or processing the data.
+     */
     public Set<String> processData(String jsonResponse) throws Exception {
         logger.info("Starting data processing");
         ObjectMapper objectMapper = new ObjectMapper();
         try {
+            // Parse the JSON response to ApiResponse
             ApiResponse apiResponse = objectMapper.readValue(jsonResponse, ApiResponse.class);
+            // Create a map of location IDs to location names
             Map<Integer, String> locationMap = createLocationMap(apiResponse.getLocations());
+            // Find connections between routers
             Set<String> connections = findConnections(apiResponse.getRouters(), locationMap);
             logger.info("Data processing completed. Found {} connections", connections.size());
             return connections;
@@ -28,6 +41,12 @@ public class DataProcessor {
         }
     }
 
+    /**
+     * Creates a map from location IDs to location names.
+     *
+     * @param locations the list of locations to map.
+     * @return a map where the key is the location ID and the value is the location name.
+     */
     private Map<Integer, String> createLocationMap(List<Location> locations) {
         Map<Integer, String> locationMap = new HashMap<>();
         for (Location location : locations) {
@@ -37,6 +56,13 @@ public class DataProcessor {
         return locationMap;
     }
 
+    /**
+     * Finds and formats connections between routers based on their locations.
+     *
+     * @param routers     the list of routers to process.
+     * @param locationMap a map of location IDs to location names.
+     * @return a set of formatted strings representing connections between different locations.
+     */
     private Set<String> findConnections(List<Router> routers, Map<Integer, String> locationMap) {
         Set<String> connections = new HashSet<>();
         Map<Integer, Router> routerMap = new HashMap<>();
