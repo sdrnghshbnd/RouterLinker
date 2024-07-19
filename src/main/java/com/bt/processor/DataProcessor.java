@@ -39,10 +39,17 @@ public class DataProcessor {
 
     private Set<String> findConnections(List<Router> routers, Map<Integer, String> locationMap) {
         Set<String> connections = new HashSet<>();
+        Map<Integer, Router> routerMap = new HashMap<>();
+
+        // Populate the routerMap for quick lookup
+        for (Router router : routers) {
+            routerMap.put(router.getId(), router);
+        }
+
         for (Router router : routers) {
             String location1 = locationMap.get(router.getLocationId());
             for (int linkedRouterId : router.getRouterLinks()) {
-                Router linkedRouter = findRouterById(routers, linkedRouterId);
+                Router linkedRouter = routerMap.get(linkedRouterId);
                 if (linkedRouter != null) {
                     String location2 = locationMap.get(linkedRouter.getLocationId());
                     if (!location1.equals(location2)) {
@@ -51,14 +58,8 @@ public class DataProcessor {
                 }
             }
         }
+
         logger.debug("Found {} unique connections", connections.size());
         return connections;
-    }
-
-    private Router findRouterById(List<Router> routers, int id) {
-        return routers.stream()
-                .filter(r -> r.getId() == id)
-                .findFirst()
-                .orElse(null);
     }
 }

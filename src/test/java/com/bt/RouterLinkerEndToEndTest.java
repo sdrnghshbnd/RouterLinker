@@ -1,6 +1,5 @@
 package com.bt;
 
-import com.bt.Main;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +31,8 @@ class RouterLinkerEndToEndTest {
 
         // Assert
         String output = outContent.toString();
-        assertTrue(output.contains("Connections:"));
-        // Add more specific assertions based on your expected output
+        assertTrue(output.contains("---------- Connections ----------"), "Output should contain 'Connections:' but was: " + output);
+        assertTrue(output.contains("Lancaster Brewery <-> Loughborough University"));
+        assertTrue(output.contains("Lancaster Castle <-> Loughborough University"));
     }
 }

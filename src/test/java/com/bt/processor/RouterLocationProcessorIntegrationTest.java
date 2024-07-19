@@ -42,7 +42,7 @@ class RouterLocationProcessorTest {
 
         // Assert
         String output = outContent.toString();
-        assertTrue(output.contains("Connections:"));
+        assertTrue(output.contains("---------- Connections ----------"));
         assertTrue(output.contains("Location1 <-> Location2"));
     }
 
