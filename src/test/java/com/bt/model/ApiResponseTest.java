@@ -30,11 +30,9 @@ class ApiResponseTest {
         apiResponse.setLocations(List.of(location1));
         apiResponse.setRouters(List.of(router1));
 
-        // Act
         String json = objectMapper.writeValueAsString(apiResponse);
         ApiResponse deserializedResponse = objectMapper.readValue(json, ApiResponse.class);
 
-        // Assert
         assertEquals(apiResponse.getLocations(), deserializedResponse.getLocations());
         assertEquals(apiResponse.getRouters(), deserializedResponse.getRouters());
     }

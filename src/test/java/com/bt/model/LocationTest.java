@@ -13,17 +13,15 @@ class LocationTest {
 
     @Test
     void testSerialization() throws IOException {
-        // Arrange
+
         Location location = new Location();
         location.setId(1);
         location.setPostCode("AB1 2CD");
         location.setName("Location1");
 
-        // Act
         String json = objectMapper.writeValueAsString(location);
         Location deserializedLocation = objectMapper.readValue(json, Location.class);
 
-        // Assert
         assertEquals(location.getId(), deserializedLocation.getId());
         assertEquals(location.getPostCode(), deserializedLocation.getPostCode());
         assertEquals(location.getName(), deserializedLocation.getName());

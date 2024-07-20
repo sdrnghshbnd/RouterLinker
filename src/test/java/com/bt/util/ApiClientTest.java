@@ -2,8 +2,9 @@ package com.bt.util;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class ApiClientTest {
 
     @Mock
@@ -28,43 +30,41 @@ class ApiClientTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
         apiClient = new ApiClient(mockHttpClient);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     void testFetchJsonFromApi_Success() throws Exception {
-        // Arrange
+
         String expectedJson = "{\"key\":\"value\"}";
         HttpResponse<String> mockResponse = new MockHttpResponse<>(200, expectedJson);
         when(mockHttpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
                 .thenReturn(mockResponse);
 
-        // Act
         String result = apiClient.fetchJsonFromApi("http://test.com");
 
-        // Assert
         assertEquals(expectedJson, result);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     void testFetchJsonFromApi_Failure() throws Exception {
-        // Arrange
+
         HttpResponse<String> mockResponse = new MockHttpResponse<>(404, "Not Found");
         when(mockHttpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
                 .thenReturn(mockResponse);
 
-        // Act & Assert
         assertThrows(Exception.class, () -> apiClient.fetchJsonFromApi("http://test.com"));
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     void testFetchJsonFromApi_IOExceptionHandling() throws Exception {
-        // Arrange
+
         when(mockHttpClient.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class)))
                 .thenThrow(new IOException("Network error"));
 
-        // Act & Assert
         assertThrows(Exception.class, () -> apiClient.fetchJsonFromApi("http://test.com"));
     }
 

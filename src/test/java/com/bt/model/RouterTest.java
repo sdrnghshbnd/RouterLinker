@@ -14,18 +14,16 @@ class RouterTest {
 
     @Test
     void testSerialization() throws IOException {
-        // Arrange
+
         Router router = new Router();
         router.setId(1);
         router.setName("Router1");
         router.setLocationId(1);
         router.setRouterLinks(Arrays.asList(2, 3));
 
-        // Act
         String json = objectMapper.writeValueAsString(router);
         Router deserializedRouter = objectMapper.readValue(json, Router.class);
 
-        // Assert
         assertEquals(router.getId(), deserializedRouter.getId());
         assertEquals(router.getName(), deserializedRouter.getName());
         assertEquals(router.getLocationId(), deserializedRouter.getLocationId());
