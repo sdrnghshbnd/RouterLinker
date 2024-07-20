@@ -32,7 +32,7 @@
 
 ## Configuration
 
-Configuration properties are stored in the `config.properties` file located in the `src/main/resources` directory. Ensure that the API URL and other necessary configurations are set correctly in this file.
+Configuration properties are stored in the `config.properties` file located in the `src/main/resources` directory. If you want to test the project against a different API, you can change the API_URL.
 
 ## Logging
 
