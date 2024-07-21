@@ -5,7 +5,7 @@ public class ConnectionFormatter {
     /**
      * Formats a connection between two locations into a string representation.
      * The format will ensure that the connection is always displayed with
-     * the lexicographically smaller location first.
+     * the alphabetically smaller location first.
      *
      * @param location1 the name of the first location.
      * @param location2 the name of the second location.

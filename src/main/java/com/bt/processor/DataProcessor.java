@@ -62,20 +62,24 @@ public class DataProcessor {
      */
     private Set<String> findConnections(List<Router> routers, Map<Integer, String> locationMap) {
         Set<String> connections = new HashSet<>();
-        Map<Integer, Router> routerMap = new HashMap<>();
+        Map<Integer, Integer> routerLocationMap = new HashMap<>();
 
-        // Populate the routerMap for quick lookup
+        // Populate the routerLocationMap for quick lookup
         for (Router router : routers) {
-            routerMap.put(router.getId(), router);
+            routerLocationMap.put(router.getId(), router.getLocationId());
         }
 
         for (Router router : routers) {
             String location1 = locationMap.get(router.getLocationId());
             for (int linkedRouterId : router.getRouterLinks()) {
-                Router linkedRouter = routerMap.get(linkedRouterId);
-                if (linkedRouter != null) {
-                    String location2 = locationMap.get(linkedRouter.getLocationId());
+                Integer linkedRouterLocationId = routerLocationMap.get(linkedRouterId);
+                if (linkedRouterLocationId != null) {
+                    String location2 = locationMap.get(linkedRouterLocationId);
                     if (!location1.equals(location2)) {
+                        // If we find a connection like location1 <-> location2 and also location2 <-> location1,
+                        // the only connection we see at the end is location1 <-> location2 because we formatted the connection
+                        // to have the alphabetically smaller location first. Since we are using a set, we only keep location1 <-> location2
+
                         connections.add(ConnectionFormatter.formatConnection(location1, location2));
                     }
                 }
