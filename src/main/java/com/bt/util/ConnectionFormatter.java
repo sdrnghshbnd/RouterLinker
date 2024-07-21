@@ -1,8 +1,5 @@
 package com.bt.util;
 
-/**
- * Provides utility methods for formatting connections between locations.
- */
 public class ConnectionFormatter {
 
     /**

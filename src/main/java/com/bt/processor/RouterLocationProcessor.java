@@ -7,10 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
-/**
- * Processor class responsible for fetching and processing routers and locations data from a rest API.
- * It uses {@link ApiClient} to fetch the data and processes it to find connections between routers.
- */
 public class RouterLocationProcessor {
     private static final Logger logger = LoggerFactory.getLogger(RouterLocationProcessor.class);
     private final ApiClient apiClient;
@@ -24,7 +20,7 @@ public class RouterLocationProcessor {
     public RouterLocationProcessor(ApiClient apiClient) {
         this.apiClient = apiClient;
         this.apiUrl = ConfigLoader.getProperty("API_URL");
-        logger.debug("Initialized RouterLocationProcessor with API URL: {}", apiUrl);
+        logger.info("Initialized RouterLocationProcessor with API URL: {}", apiUrl);
     }
 
     /**
@@ -54,7 +50,7 @@ public class RouterLocationProcessor {
             logger.info("Processed {} connections", connections.size());
         } catch (Exception e) {
             logger.error("Error during data processing", e);
-            throw e; // Re-throw to be caught in Main
+            throw e; // to caught it in Main
         }
         logger.info("Data processing completed");
     }

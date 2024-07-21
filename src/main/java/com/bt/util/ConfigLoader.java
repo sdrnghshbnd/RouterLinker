@@ -28,7 +28,6 @@ public class ConfigLoader {
             properties.load(input);
             logger.info("Configuration loaded successfully");
         } catch (IOException ex) {
-            logger.error("Error loading configuration", ex);
             throw new RuntimeException("Error loading configuration", ex);
         }
     }
@@ -41,10 +40,6 @@ public class ConfigLoader {
      * @return the value of the property, or {@code null} if the property is not found.
      */
     public static String getProperty(String key) {
-        String value = properties.getProperty(key);
-        if (value == null) {
-            logger.warn("Property not found: {}", key);
-        }
-        return value;
+        return properties.getProperty(key);
     }
 }

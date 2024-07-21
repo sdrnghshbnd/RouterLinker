@@ -10,9 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-/**
- * It parses the JSON, maps locations, and finds connections between routers.
- */
 public class DataProcessor {
     private static final Logger logger = LoggerFactory.getLogger(DataProcessor.class);
 
@@ -52,7 +49,7 @@ public class DataProcessor {
         for (Location location : locations) {
             locationMap.put(location.getId(), location.getName());
         }
-        logger.debug("Created location map with {} entries", locationMap.size());
+        logger.info("Location map is created with {} entries", locationMap.size());
         return locationMap;
     }
 
@@ -85,7 +82,7 @@ public class DataProcessor {
             }
         }
 
-        logger.debug("Found {} unique connections", connections.size());
+        logger.info("{} unique connections found", connections.size());
         return connections;
     }
 }

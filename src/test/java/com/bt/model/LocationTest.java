@@ -20,10 +20,10 @@ class LocationTest {
         location.setName("Location1");
 
         String json = objectMapper.writeValueAsString(location);
-        Location deserializedLocation = objectMapper.readValue(json, Location.class);
+        Location res = objectMapper.readValue(json, Location.class);
 
-        assertEquals(location.getId(), deserializedLocation.getId());
-        assertEquals(location.getPostCode(), deserializedLocation.getPostCode());
-        assertEquals(location.getName(), deserializedLocation.getName());
+        assertEquals(location.getId(), res.getId());
+        assertEquals(location.getPostCode(), res.getPostCode());
+        assertEquals(location.getName(), res.getName());
     }
 }

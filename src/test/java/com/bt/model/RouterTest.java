@@ -22,11 +22,11 @@ class RouterTest {
         router.setRouterLinks(Arrays.asList(2, 3));
 
         String json = objectMapper.writeValueAsString(router);
-        Router deserializedRouter = objectMapper.readValue(json, Router.class);
+        Router res = objectMapper.readValue(json, Router.class);
 
-        assertEquals(router.getId(), deserializedRouter.getId());
-        assertEquals(router.getName(), deserializedRouter.getName());
-        assertEquals(router.getLocationId(), deserializedRouter.getLocationId());
-        assertEquals(router.getRouterLinks(), deserializedRouter.getRouterLinks());
+        assertEquals(router.getId(), res.getId());
+        assertEquals(router.getName(), res.getName());
+        assertEquals(router.getLocationId(), res.getLocationId());
+        assertEquals(router.getRouterLinks(), res.getRouterLinks());
     }
 }

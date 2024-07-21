@@ -14,7 +14,6 @@ class ApiResponseTest {
 
     @Test
     void testSerialization() throws IOException {
-        // Arrange
         Location location1 = new Location();
         location1.setId(1);
         location1.setPostCode("AB1 2CD");
@@ -31,9 +30,9 @@ class ApiResponseTest {
         apiResponse.setRouters(List.of(router1));
 
         String json = objectMapper.writeValueAsString(apiResponse);
-        ApiResponse deserializedResponse = objectMapper.readValue(json, ApiResponse.class);
+        ApiResponse res = objectMapper.readValue(json, ApiResponse.class);
 
-        assertEquals(apiResponse.getLocations(), deserializedResponse.getLocations());
-        assertEquals(apiResponse.getRouters(), deserializedResponse.getRouters());
+        assertEquals(apiResponse.getLocations(), res.getLocations());
+        assertEquals(apiResponse.getRouters(), res.getRouters());
     }
 }
