@@ -68,3 +68,10 @@ Logging configuration is handled by `log4j2.xml`, located in the `src/main/resou
 ## Running Tests
 
 Run tests with Maven: `mvn test`
+
+Create test report with:
+```
+mvn clean test surefire-report:report
+```
+and then find the report in :
+`target/surefire-reports/surefire-report.html`
